@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Navigation from "./components/Navigation/Navigation";
+import { Layout } from 'antd'
+import KanbanPage from "./pages/KanbanPage";
+
+const { Header, Content, Footer, Sider } = Layout
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Sider>
+        <Navigation />
+      </Sider>
+      <Layout>
+        <h1>Hi!</h1>
+        <Content>
+          <KanbanPage />
+        </Content>
+        <Footer>
+          2022 Created by Diego
+        </Footer>
+      </Layout>
+    </Layout>
   );
 }
 
-export default App;
+export default App
