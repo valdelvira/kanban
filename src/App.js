@@ -1,7 +1,7 @@
 import './App.css'
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/Navigation/Navigation"
 import { Layout } from 'antd'
-import KanbanPage from "./pages/KanbanPage";
+import AppRoutes from './routes/AppRoutes'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -12,9 +12,9 @@ function App() {
         <Navigation />
       </Sider>
       <Layout>
-        <h1>Hi!</h1>
+        <Header>Header</Header>
         <Content>
-          <KanbanPage />
+          <AppRoutes />
         </Content>
         <Footer>
           2022 Created by Diego
