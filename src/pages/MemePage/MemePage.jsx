@@ -1,16 +1,27 @@
-import { Row,Col } from "antd";
+import { Row, Col, Alert, Button } from "antd";
 import html2canvas from "html2canvas";
-import { useState } from "react"
-import {  } from "./MemePage.css";
+import { useEffect, useState } from "react"
+import { } from "./MemePage.css";
 
 const MemePage = () => {
     const [textTop, setTextTop] = useState('')
     const [textBottom, setTextBottom] = useState('')
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState('default')
+    const [visible, setVisible] = useState(false)
+    useEffect(() => {
+        if (image !== 'default') {
+            document.querySelectorAll('#meme span').forEach(span => span.classList.add('textBox'))
+        } else {
+            document.querySelectorAll('#meme span').forEach(span => span.classList.remove('textBox'))
+        }
+    }, [image])
 
     const handleInputTextTop = e => setTextTop(e.target.value)
     const handleInputTextBottom = e => setTextBottom(e.target.value)
-    const handleImage = e => setImage(e.target.value)
+    const handleImage = e => {
+        setImage(e.target.value)
+
+    }
     const options = {
         image: image,
         width: 500,
@@ -19,23 +30,25 @@ const MemePage = () => {
 
     }
     const handlesExport = e => {
-      
-        html2canvas(document.getElementById("meme"), options)
-            .then(canvas => {
-                const imgData = canvas.toDataURL("image/png")
-                //download image    
-                const link = document.createElement("a")
-                link.download = "meme.png"
-                link.href = imgData
-                link.click()
-            })
-            .catch(err => console.log(err))
+        if (image === 'default' || textTop === '' || textBottom === '') {
+            setVisible(true)
+        } else {
+            html2canvas(document.getElementById("meme"), options)
+                .then(canvas => {
+                    const imgData = canvas.toDataURL("image/png")
+                    const link = document.createElement("a")
+                    link.download = "meme.png"
+                    link.href = imgData
+                    link.click()
+                })
+                .catch(err => console.log(err))
+        }
     }
 
-    return ( 
-        <Row justifyContent="center">
+    return (
+        <Row className="flex center">
             <Col span={24} justify="center">
-            
+
                 <h2>Meme Generator</h2>
                 <select onChange={handleImage}>
                     <option value="default">Select...</option>
@@ -46,26 +59,37 @@ const MemePage = () => {
                     <option value="raptor">Velociraptor</option>
                     <option value="smart">Be smart</option>
                 </select>
-                <br/>
-                <span>Text on top:
-                    <input onChange={handleInputTextTop}/>
+                <br />
+                <br />
+                <span>Text on top:<br />
+                    <input onChange={handleInputTextTop} />
                 </span>
-                <br/>
-                <span>Text on bottom:
-                    <input onChange={handleInputTextBottom}/>
+                <br />
+                <br />
+                <span>Text on bottom:<br />
+                    <input onChange={handleInputTextBottom} />
                 </span>
-                <br/>
+                <br />
+                <br />
                 <div id="meme">
-                    <span className="textBox topText">{textTop}</span>
-                    <br/>
-                    <span className="textBox bottomText">{textBottom}</span>
-                    <img  src={`/img/${image}.jpeg`} alt={image} />
+                    <span className="topText">{textTop}</span>
+                    <br />
+                    <span className="bottomText">{textBottom}</span>
+                    <img src={`/img/${image}.jpeg`} alt={image} />
                 </div>
-                <button onClick={handlesExport}>Generate</button>
+                <br />
+                {visible
+                    ?
+                    (
+                        <Alert message='Please select an image' type='error' />
+                    )
+                    : null
+                }
+                <Button type="primary" onClick={handlesExport}>Generate</Button>
             </Col>
         </Row>
 
-     )
+    )
 }
 
 export default MemePage

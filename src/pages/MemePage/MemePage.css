@@ -1,21 +1,28 @@
 .textBox  {
     position: absolute;
-    left: 15%;
     text-align: center;
     color: #fff;
     background: rgba(0, 0, 0, 0.5);
     padding: 1em;
 }
-/* #meme img {
-    width: 50%;
-} */
+ #meme  {
+  display: flex;
+  justify-content: center;
+} 
 .topText{
-    top: 25%;
+    top: 35%;
 }
 
 .bottomText {
     top: 83%;
 }
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f1f1f1;
+    padding: 10px;
+}
 .center{
+    text-align: center;
     
 }
