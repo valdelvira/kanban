@@ -1,0 +1,21 @@
+.textBox  {
+    position: absolute;
+    left: 15%;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+}
+/* #meme img {
+    width: 50%;
+} */
+.topText{
+    top: 25%;
+}
+
+.bottomText {
+    top: 83%;
+}
+.center{
+    
+}
