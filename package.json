@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.19.3",
     "axios": "^0.26.1",
+    "cors": "^2.8.5",
     "html2canvas": "^1.4.1",
     "react": "^18.0.0",
     "react-beautiful-dnd": "^13.1.0",

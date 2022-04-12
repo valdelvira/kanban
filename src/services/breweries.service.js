@@ -1,12 +1,12 @@
 import axios from "axios"
 
-class BeerService {
+class BreweriesService {
     constructor() {
         this.url = "https://api.openbrewerydb.org/"
     }
 
     getBreweries() {
-        return axios.get(this.url)
+        return axios.get(this.url + "breweries")
     }
     getBreweriesByName(name) {
         return axios.get(this.url + "breweries?by_name=" + name)
@@ -25,6 +25,6 @@ class BeerService {
     }
 }
 
-const beerService = new BeerService()
+const breweriesService = new BreweriesService()
 
-export default beerService
+export default breweriesService
