@@ -14,7 +14,9 @@ function App() {
       <Layout>
         <Header>Header</Header>
         <Content>
-          <AppRoutes />
+          <div className="site-layout-content">
+            <AppRoutes />
+          </div>
         </Content>
         <Footer>
           2022 Created by Diego

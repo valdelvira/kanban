@@ -27,6 +27,12 @@ const Navigation = () => {
                 <Menu.Item key='3'>
                     <NavLink to='/breweries'>Breweries</NavLink>
                 </Menu.Item>
+                <Menu.Item key='4'>
+                    <NavLink to='/login'>Login</NavLink>
+                </Menu.Item>
+                <Menu.Item key='5'>
+                    <NavLink to='/signin'>Register</NavLink>
+                </Menu.Item>
             </Menu>
         </>
 

@@ -8,31 +8,31 @@ const itemsFromBackend = [
     { id: uuidv4(), content: 'Third task' }
 ]
 
-const columnsFromBackend = 
-    {
-        [uuidv4()]: {
-            name: 'Requested',
-            items: itemsFromBackend
-        },
-        [uuidv4()]: {
-            name: 'To do',
-            items: []
-        },
-        [uuidv4()]: {
-            name: 'In progress',
-            items: []
-        },
-        [uuidv4()]: {
-            name: 'Done',
-            items: []
-        } 
+const columnsFromBackend =
+{
+    [uuidv4()]: {
+        name: 'Requested',
+        items: itemsFromBackend
+    },
+    [uuidv4()]: {
+        name: 'To do',
+        items: []
+    },
+    [uuidv4()]: {
+        name: 'In progress',
+        items: []
+    },
+    [uuidv4()]: {
+        name: 'Done',
+        items: []
     }
+}
 
 const onDragEnd = (result, columns, setColumns) => {
-    if(!result.destination) return //check card destination is allowed
-    const { source, destination } = result 
+    if (!result.destination) return //check card destination is allowed
+    const { source, destination } = result
     //check if drag to other column
-    if(source.droppableId !== destination.droppableId) {
+    if (source.droppableId !== destination.droppableId) {
         const sourceCol = columns[source.droppableId]
         const destCol = columns[destination.droppableId]
         const sourceItems = [...sourceCol.items]
@@ -50,7 +50,7 @@ const onDragEnd = (result, columns, setColumns) => {
                 items: destItems
             }
         })
-    }else{
+    } else {
         const column = columns[source.droppableId]
         const copiedItems = [...column.items]
         const [removed] = copiedItems.splice(source.index, 1)
@@ -63,22 +63,22 @@ const onDragEnd = (result, columns, setColumns) => {
             }
         })
     }
-} 
+}
 
 
-const KanbanPage = ()  => {
-    const [ columns, setColumns ] = useState(columnsFromBackend)
+const KanbanPage = () => {
+    const [columns, setColumns] = useState(columnsFromBackend)
     console.log(columns)
-    return (  
+    return (
         <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
-            <DragDropContext onDragEnd={ result => onDragEnd(result, columns, setColumns) }>
+            <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
                 {
                     Object.entries(columns).map(([columnId, column]) => {
                         return (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <div key={columnId} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <h2>{column.name}</h2>
                                 <div style={{ margin: 8 }}>
-                                    <Droppable droppableId={columnId}  key={columnId} >
+                                    <Droppable droppableId={columnId} key={columnId} >
                                         {(provided, snapshot) => {
                                             return (
                                                 <div
@@ -93,10 +93,10 @@ const KanbanPage = ()  => {
                                                 >
                                                     {
                                                         column.items.map((item, index) => {
-                                                            return(
+                                                            return (
                                                                 <Draggable key={item.id} draggableId={item.id} index={index}>
                                                                     {(provided, snapshot) => {
-                                                                        return(
+                                                                        return (
                                                                             <div
                                                                                 ref={provided.innerRef}
                                                                                 {...provided.draggableProps}

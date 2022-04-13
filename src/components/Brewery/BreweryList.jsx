@@ -6,10 +6,8 @@ const BreweryList = ({ breweries }) => {
         <Row gutter={[14, 20]}>
             {breweries.map(brewery => {
                 return (
-                    <Col span={8}>
-                        <div key={brewery.id}>
-                            <BreweryCard {...brewery} />
-                        </div>
+                    <Col span={8} key={brewery.id}>
+                        <BreweryCard {...brewery} />
                     </Col>
                 )
             }
