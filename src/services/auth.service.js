@@ -8,8 +8,8 @@ class AuthService {
         })
     }
 
-    signup = (name, email, password) => this.service.post('/signup', { name, email, password })
-    login = (email, password) => this.service.post('/login', { email, password })
+    signup = credentials => this.service.post('/signup', credentials)
+    login = credentials => this.service.post('/login', credentials)
     logout = () => this.service.get('/logout')
     loggedin = () => this.service.get('/loggedin')
 }
