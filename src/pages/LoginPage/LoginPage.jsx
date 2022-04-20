@@ -1,6 +1,8 @@
 import { Button, Form, Input } from 'antd'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import authService from '../../services/auth.service'
+import { AuthContext } from './../../context/auth.context'
+
 
 const LoginPage = () => {
 
@@ -8,9 +10,10 @@ const LoginPage = () => {
         email: '',
         password: ''
     })
+    const { storeToken, authenticateUser } = useContext(AuthContext)
 
     const handleInputChange = e => {
-        debugger
+
         const { name, value } = e.target
         setLoginForm({
             ...loginForm,
@@ -19,11 +22,14 @@ const LoginPage = () => {
     }
 
     const handleSubmit = e => {
+        debugger
         console.log(loginForm)
         authService
             .login(loginForm)
-            .then(res => {
-                console.log(res)
+            .then(({ data }) => {
+                storeToken(data.token)
+                authenticateUser()
+                console.log(data)
             })
             .catch(err => console.log(err))
     }
