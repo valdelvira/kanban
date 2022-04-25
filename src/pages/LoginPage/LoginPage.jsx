@@ -1,8 +1,8 @@
 import { Button, Form, Input } from 'antd'
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import authService from '../../services/auth.service'
 import { AuthContext } from './../../context/auth.context'
-
 
 const LoginPage = () => {
 
@@ -10,6 +10,7 @@ const LoginPage = () => {
         email: '',
         password: ''
     })
+    const navigate = useNavigate()
     const { storeToken, authenticateUser } = useContext(AuthContext)
 
     const handleInputChange = e => {
@@ -29,7 +30,7 @@ const LoginPage = () => {
             .then(({ data }) => {
                 storeToken(data.token)
                 authenticateUser()
-                console.log(data)
+                navigate('/')
             })
             .catch(err => console.log(err))
     }

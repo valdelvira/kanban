@@ -12,7 +12,7 @@ class AuthService {
     login = credentials => this.service.post('/login', credentials)
     logout = () => this.service.get('/logout')
     loggedin = () => this.service.get('/loggedin')
-    verify = (token) => this.service.get('/verify', { headers: { Authorization: token } })
+    verify = token => this.api.get('/verify', { headers: { Authorization: `Bearer ${token}` } })
 }
 
 const authService = new AuthService()
